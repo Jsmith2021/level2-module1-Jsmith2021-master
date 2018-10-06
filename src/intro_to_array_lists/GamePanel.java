@@ -11,6 +11,7 @@ import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics; 
+// PART 7, STEP 5
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
