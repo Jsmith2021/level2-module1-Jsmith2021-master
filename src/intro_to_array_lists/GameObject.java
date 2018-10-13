@@ -9,15 +9,18 @@ public class GameObject {
     int height;
     
     GameObject(int x, int y, int width, int height){
-    	
+    	this.x=x;
+    	this.y=y;
+    	this.width=width;
+    	this.height=height;
     }
     void update() {
-  x++;
-  y++;
+  
     }
-    void draw(Graphics a) {
-    	a.fillRect(x, y, 100, 100);
+    void draw(Graphics g) {
+   
     }
+    
 
 }
 
