@@ -1,6 +1,7 @@
 package intro_to_array_lists;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 public class RocketShip extends GameObject {
 int speed;
 
@@ -11,6 +12,10 @@ int speed;
 		
 	}
 void update() {
+	this.y+=speed;
+	this.x+=speed;
+	this.y-=speed;
+	this.x-=speed;
 	
 }
 void draw(Graphics g) {

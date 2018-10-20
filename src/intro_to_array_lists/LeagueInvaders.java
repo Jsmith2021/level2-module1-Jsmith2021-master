@@ -21,7 +21,6 @@ static final int HEIGHT=800;
 		panel1 = new GamePanel();
 	}
 	public static void main(String[] args) {
-		
 		LeagueInvaders invader=new LeagueInvaders();
 		invader.setup();
 	}
