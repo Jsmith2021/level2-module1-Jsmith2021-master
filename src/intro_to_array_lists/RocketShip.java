@@ -12,10 +12,8 @@ int speed;
 		
 	}
 void update() {
-	this.y+=speed;
-	this.x+=speed;
-	this.y-=speed;
-	this.x-=speed;
+	
+	
 	
 }
 void draw(Graphics g) {
