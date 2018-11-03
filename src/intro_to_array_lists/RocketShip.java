@@ -3,7 +3,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 public class RocketShip extends GameObject {
-int speed;
+	super.update();
+	int speed;
 
 	RocketShip(int x, int y, int width, int height) {
 		super(x, y, width, height);

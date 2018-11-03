@@ -57,7 +57,20 @@ enemyTimer = System.currentTimeMillis();
 
 	}
 	void purgeObjects() {
-		
+	//part 11 step 10	
 	}
+	void checkCollision() {
+		for(Alien a : alien){
 
+	        if(object.collisionBox.intersects(a.collisionBox)){
+
+	                object.isAlive = false;
+
+	        }
+
+//part 12 step 8
+	}
+		
+
+	}
 }
