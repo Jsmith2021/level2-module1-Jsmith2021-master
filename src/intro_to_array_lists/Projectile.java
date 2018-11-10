@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class Projectile extends GameObject{
 int speed;
-super.update();
+
 	Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		speed=10;
@@ -16,6 +16,7 @@ super.update();
 		if(y<0) {
 			isAlive=false;
 		}
+		super.update();
 	}
 	void draw(Graphics g) {
 		g.setColor(Color.RED);

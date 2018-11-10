@@ -11,7 +11,7 @@ import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics; 
-
+// PART 12 STEP 8
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
 	final int MENU_STATE = 0;
@@ -45,6 +45,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		object.update();
 		object.manageEnemies();
+		object.checkCollision();
+		object.purgeObjects();
+		//if(isAlive=false) {
+		//	currentState=END_STATE;
+		//}
 		
 	}
 	void updateEndState() {

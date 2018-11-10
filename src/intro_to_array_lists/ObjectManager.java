@@ -57,20 +57,32 @@ enemyTimer = System.currentTimeMillis();
 
 	}
 	void purgeObjects() {
-	//part 11 step 10	
+		for (int i=0; i<alien.size(); i++) {
+			if(alien.get(i).isAlive==false) {
+		 		alien.remove(i);
+		} 
+		} 
+		
+	 	for (int i = 0; i<projectiles.size(); i++) {
+	if(alien.get(i).isAlive==false) {
+		projectiles.remove(i);
+	 			
+	 		}
+		} 
 	}
 	void checkCollision() {
+		
 		for(Alien a : alien){
-
-	        if(object.collisionBox.intersects(a.collisionBox)){
-
-	                object.isAlive = false;
-
-	        }
-
-//part 12 step 8
-	}
+		for(Projectile p: projectiles) {
+		if(p.collisionBox.intersects(a.collisionBox)){
+			p.isAlive = false;
+			a.isAlive = false;
+		}
+		
+		
 		
 
+	}
+}
 	}
 }
