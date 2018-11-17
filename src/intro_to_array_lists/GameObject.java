@@ -18,10 +18,10 @@ public class GameObject {
     	this.y=y;
     	this.width=width;
     	this.height=height;
-    	collisionBox=new Rectangle(5,10,100,200);
+    	collisionBox=new Rectangle(x, y, width, height);
     }
     void update() {
-  
+  collisionBox.setBounds(x, y, width, height);
     }
     void draw(Graphics g) {
    

@@ -10,16 +10,22 @@ public class ObjectManager {
 	int enemySpawnTime;
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	ArrayList<Alien> alien = new ArrayList<Alien>();
+	int score;
+
+	
 
 	ObjectManager(RocketShip object) {
 		this.object = object;
-enemyTimer=0;
-enemySpawnTime=2000;
+		enemyTimer = 0;
+		enemySpawnTime = 2000;
+		score=0;
 	}
-
+public int getScore() {
+	return this.score;
+}
 	void update() {
 		object.update();
-		
+
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).update();
 		}
@@ -45,44 +51,48 @@ enemySpawnTime=2000;
 		projectiles.add(p);
 
 	}
+
 	void addAlien(Alien a) {
 		alien.add(a);
 	}
+
 	public void manageEnemies() {
-		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-            addAlien(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
+		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
+			addAlien(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
 
-enemyTimer = System.currentTimeMillis();
-    }
-
-	}
-	void purgeObjects() {
-		for (int i=0; i<alien.size(); i++) {
-			if(alien.get(i).isAlive==false) {
-		 		alien.remove(i);
-		} 
-		} 
-		
-	 	for (int i = 0; i<projectiles.size(); i++) {
-	if(alien.get(i).isAlive==false) {
-		projectiles.remove(i);
-	 			
-	 		}
-		} 
-	}
-	void checkCollision() {
-		
-		for(Alien a : alien){
-		for(Projectile p: projectiles) {
-		if(p.collisionBox.intersects(a.collisionBox)){
-			p.isAlive = false;
-			a.isAlive = false;
+			enemyTimer = System.currentTimeMillis();
 		}
-		
-		
-		
 
 	}
-}
+
+	void purgeObjects() {
+		for (int i = 0; i < alien.size(); i++) {
+			if (alien.get(i).isAlive == false) {
+				alien.remove(i);
+				System.out.println("alien shot");
+				score++; 
+			}
+		}
+
+		for (int i = 0; i < projectiles.size(); i++) {
+			if (projectiles.get(i).isAlive == false) {
+				projectiles.remove(i);
+				System.out.println("Collision with alien");
+
+			}
+		}
+	}
+
+	void checkCollision() {
+
+		for (Alien a : alien) {
+			for (Projectile p : projectiles) {
+				if (p.collisionBox.intersects(a.collisionBox)) {
+					p.isAlive = false;
+					a.isAlive = false;
+				}
+
+			}
+		}
 	}
 }

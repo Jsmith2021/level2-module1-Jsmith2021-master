@@ -11,7 +11,7 @@ import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics; 
-// PART 12 STEP 8
+
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
 	final int MENU_STATE = 0;
@@ -47,10 +47,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		object.manageEnemies();
 		object.checkCollision();
 		object.purgeObjects();
-		//if(isAlive=false) {
-		//	currentState=END_STATE;
-		//}
-		
+		if(rocket.isAlive==false) {
+			currentState=END_STATE;
+		}
+
+				
 	}
 	void updateEndState() {
 		
@@ -144,7 +145,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if (currentState > END_STATE){
             currentState = MENU_STATE;
 		
+            if(currentState==END_STATE) {
+            	rocket=new RocketShip(250, 700, 50, 50) ;
+            	object= new ObjectManager(rocket);
+            
+            
            
+		}
 		}
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN) {
@@ -163,6 +170,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 }
 		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 			object.addProjectile(new Projectile(rocket.x+20, rocket.y, 10, 10));
+			System.out.println("Projectile shot");
 		}
     }
 	
