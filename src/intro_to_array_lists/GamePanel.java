@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -25,6 +28,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font restart;
 	RocketShip rocket;
 	ObjectManager object;
+	 public static BufferedImage alienImg;
+     public static BufferedImage rocketImg;
+     public static BufferedImage bulletImg;
+     public static BufferedImage spaceImg;
 	
 	//GameObject object;
 	
@@ -38,6 +45,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		restart=new Font ("Arial", Font.PLAIN, 24);
 		rocket=new RocketShip(250, 700, 50, 50);
 		object=new ObjectManager(rocket);
+		 try {
+
+             alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+
+             rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+
+             bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+
+             spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+
+     } catch (IOException e) {
+
+             // TODO Auto-generated catch block
+
+             e.printStackTrace();
+
+     }
 	}
 	void updateMenuState() {
 		
@@ -71,13 +95,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(gameOver);
 		
 		
+		
 	}
 	void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);  
+		g.drawImage(spaceImg, 0,0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null); 
 		//rocket.draw(g);
 		object.draw(g);
-		
+	
 	}
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
@@ -155,18 +179,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		}
 		if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-			rocket.y++;	
+			rocket.y+=2;	
 			
 			
 		}
 		if(e.getKeyCode()==KeyEvent.VK_UP) {
-			rocket.y--;
+			rocket.y-=2;
 		}
 		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-	rocket.x++;
+	rocket.x+=2;
 }
 		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-	rocket.x--;
+	rocket.x-=2;
 }
 		if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 			object.addProjectile(new Projectile(rocket.x+20, rocket.y, 10, 10));

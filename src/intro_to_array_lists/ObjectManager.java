@@ -55,6 +55,7 @@ public int getScore() {
 	void addAlien(Alien a) {
 		alien.add(a);
 	}
+	
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
@@ -69,7 +70,6 @@ public int getScore() {
 		for (int i = 0; i < alien.size(); i++) {
 			if (alien.get(i).isAlive == false) {
 				alien.remove(i);
-				System.out.println("alien shot");
 				score++; 
 			}
 		}
@@ -77,10 +77,11 @@ public int getScore() {
 		for (int i = 0; i < projectiles.size(); i++) {
 			if (projectiles.get(i).isAlive == false) {
 				projectiles.remove(i);
-				System.out.println("Collision with alien");
 
 			}
 		}
+	
+		
 	}
 
 	void checkCollision() {
@@ -94,5 +95,12 @@ public int getScore() {
 
 			}
 		}
+		for(Alien a : alien) {
+				if(a.collisionBox.intersects(object.collisionBox)) {
+					a.isAlive=false;
+					object.isAlive=false;
+				}
+			}
+		}
 	}
-}
+
