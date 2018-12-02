@@ -13,8 +13,9 @@ import javax.swing.Timer;
 
 public class RainGamePanel extends JPanel implements ActionListener, KeyListener {
 	final int MENU_STATE = 0;
-	final int GAME_STATE = 1;
-	final int END_STATE = 2;
+	final int INSTRUCTIONS_STATE=1;
+	final int GAME_STATE = 2;
+	final int END_STATE = 3;
 	int currentState= MENU_STATE;
 	Font menuFont;
 	Font startFont;
@@ -35,6 +36,9 @@ RainGamePanel(){
 	restart=new Font("Arial", Font.PLAIN, 24);
 }
 void updateMenuState() {
+	
+}
+void updateInstructionsState() {
 	
 }
 void updateGameState() {
@@ -80,6 +84,9 @@ g.setFont(instructionsFont);
 g.setColor(Color.BLACK);
 g.drawString("Press SPACE for Instructions",50 ,200);
 }
+void drawInstructionsState(Graphics g) {
+	
+}
 @Override
 public void paintComponent(Graphics g){
 	
@@ -101,24 +108,6 @@ public void start() {
 	rainTimer.start();
 }
 @Override
-public void keyTyped(KeyEvent e) {
-	// TODO Auto-generated method stub
-	System.out.println("hello");
-}
-
-@Override
-public void keyPressed(KeyEvent e) {
-	// TODO Auto-generated method stub
-	System.out.println("hi");
-}
-
-@Override
-public void keyReleased(KeyEvent e) {
-	// TODO Auto-generated method stub
-	System.out.println("hola");
-}
-
-@Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 	if(currentState == MENU_STATE){
@@ -135,5 +124,24 @@ public void actionPerformed(ActionEvent e) {
 
 	repaint();
 }
+@Override
+public void keyTyped(KeyEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void keyPressed(KeyEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void keyReleased(KeyEvent e) {
+	// TODO Auto-generated method stub
+	
+}
+
+
 }
 
