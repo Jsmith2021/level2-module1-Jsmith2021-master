@@ -25,13 +25,13 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 	final int INSTRUCTIONS_STATE = -1;
 	final int END_STATE = 2;
 	int currentState= MENU_STATE;
+	int score;
 	Font menuFont;
 	Font startFont;
 	Font instructionsFont;
 	Font endFont;
 	Font endFont2;
 	Font restart;
-	int score;
 	Timer rainTimer;
 	Font instructions;
 	Font instructions1;
@@ -39,7 +39,6 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 	  public static BufferedImage rain;
 	  public static BufferedImage rainpics;
 	  public static BufferedImage sunny;
-	  public static BufferedImage rainyday;
 	
 RainGamePanel(){
 	rainTimer=new Timer(1000/60,this);
@@ -56,7 +55,7 @@ RainGamePanel(){
          rain = ImageIO.read(this.getClass().getResourceAsStream("rainpic.jpg"));
          rainpics = ImageIO.read(this.getClass().getResourceAsStream("rain.jpg"));
          sunny = ImageIO.read(this.getClass().getResourceAsStream("sunnyday.jpg"));
-        // rainyGamePage = ImageIO.read(this.getClass().getResourceAsStream("rainyday.jpg"));
+       
 
  } catch (IOException e) {
 
@@ -64,29 +63,28 @@ RainGamePanel(){
 
          e.printStackTrace();
  }
+	 
 }
+
 void updateMenuState() {
 	
 }
 void updateInstructionsState() {
 	
 }
-void updateGameState() {
+void updateGameState() {	
 	
-	
-	}
-
+}
 			
-
 void updateEndState() {
 	
 }
 
 void drawGameState(Graphics g) {
 	g.drawImage(rainpics, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
-	
-	
+		
 }
+
 void drawEndState(Graphics g) {
 	g.drawImage(sunny, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
 	g.setFont(endFont);
@@ -100,6 +98,7 @@ void drawEndState(Graphics g) {
 	g.drawString("Press SHIFT to try again", 110, 500);
 	
 }
+
 void drawMenuState(Graphics g) {
 g.drawImage(rain, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
 g.setFont(menuFont);
@@ -112,6 +111,7 @@ g.setFont(instructionsFont);
 g.setColor(Color.WHITE);
 g.drawString("Press SPACE for Instructions",83 ,450);
 }
+
 void drawInstructionsState(Graphics g) {
 g.drawImage(rainpics, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
 g.setFont(instructionsTitle);
@@ -124,6 +124,7 @@ g.setFont(instructions1);
 g.drawString("Try to beat your previous score!", 90, 525);
 g.drawString("Good luck and have fun!", 130, 625);
 }
+
 @Override
 public void paintComponent(Graphics g){
 	
@@ -147,6 +148,7 @@ public void paintComponent(Graphics g){
 public void start() {
 	rainTimer.start();
 }
+
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
@@ -164,10 +166,9 @@ public void actionPerformed(ActionEvent e) {
 
 }
 	
-
-
 	repaint();
 }
+
 @Override
 public void keyTyped(KeyEvent e) {
 	// TODO Auto-generated method stub
