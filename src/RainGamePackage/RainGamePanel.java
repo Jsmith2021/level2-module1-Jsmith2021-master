@@ -39,6 +39,12 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 	  public static BufferedImage rain;
 	  public static BufferedImage rainpics;
 	  public static BufferedImage sunny;
+	  public static BufferedImage raindrop;
+	  public static BufferedImage woodenbucket;
+	  public static BufferedImage rock;
+	  rainGameObject object;
+	  Bucket bucket;
+	  RainObjectManager manager;
 	
 RainGamePanel(){
 	rainTimer=new Timer(1000/60,this);
@@ -51,11 +57,16 @@ RainGamePanel(){
 	endFont2=new Font("Arial", Font.PLAIN, 24);
 	restart=new Font("Arial", Font.PLAIN, 24);
 	instructionsTitle=new Font("Arial", Font.BOLD, 36);
+	object=new rainGameObject(10, 10, 100, 100);
+	bucket=new Bucket(250, 700, 10, 10);
+	manager=new RainObjectManager(bucket);
 	 try {
          rain = ImageIO.read(this.getClass().getResourceAsStream("rainpic.jpg"));
          rainpics = ImageIO.read(this.getClass().getResourceAsStream("rain.jpg"));
          sunny = ImageIO.read(this.getClass().getResourceAsStream("sunnyday.jpg"));
-       
+         raindrop = ImageIO.read(this.getClass().getResourceAsStream("raindroppic.png"));
+         woodenbucket = ImageIO.read(this.getClass().getResourceAsStream("bucket.png"));
+         rock = ImageIO.read(this.getClass().getResourceAsStream("rockpic.png")); 
 
  } catch (IOException e) {
 
@@ -73,7 +84,7 @@ void updateInstructionsState() {
 	
 }
 void updateGameState() {	
-	
+	bucket.update();
 }
 			
 void updateEndState() {
@@ -82,7 +93,7 @@ void updateEndState() {
 
 void drawGameState(Graphics g) {
 	g.drawImage(rainpics, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
-		
+		bucket.draw(g);
 }
 
 void drawEndState(Graphics g) {
@@ -142,6 +153,7 @@ public void paintComponent(Graphics g){
 		 drawEndState(g);
 
 }
+	object.draw(g);
 	
 }
 
@@ -165,6 +177,7 @@ public void actionPerformed(ActionEvent e) {
         updateEndState();
 
 }
+	
 	
 	repaint();
 }
@@ -208,6 +221,24 @@ if(e.getKeyCode()==KeyEvent.VK_SHIFT) {
 	}
 	
 }
+if(e.getKeyCode()==KeyEvent.VK_DOWN) {
+	bucket.y+=2;	
+	
+	
+}
+if(e.getKeyCode()==KeyEvent.VK_UP) {
+	bucket.y-=2;
+}
+if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+bucket.x+=2;
+}
+if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+bucket.x-=2;
+}
+//if(e.getKeyCode()==KeyEvent.VK_SPACE) {
+	//object.addProjectile(new Projectile(rocket.x+20, rocket.y, 10, 10));
+//	System.out.println("Projectile shot");
+//}
 }
 
         
