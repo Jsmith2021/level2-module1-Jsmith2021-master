@@ -5,17 +5,15 @@ import java.util.Random;
 
 
 		public class RainObjectManager {
-			Bucket object;
+			Bucket bucket;
 			long enemyTimer;
 			int enemySpawnTime;
 			ArrayList<Rain> raindrops = new ArrayList<Rain>();
 			ArrayList<Rocks> pebbles = new ArrayList<Rocks>();
 			int score;
 
-			
-
-			RainObjectManager(Bucket object) {
-				this.object = object;
+			RainObjectManager(Bucket bucket) {
+				this.bucket = bucket;
 				enemyTimer = 0;
 				enemySpawnTime = 2000;
 				score=0;
@@ -24,7 +22,7 @@ import java.util.Random;
 			return this.score;
 		}
 			void update() {
-				object.update();
+
 
 				for (int i = 0; i < raindrops.size(); i++) {
 					raindrops.get(i).update();
@@ -35,7 +33,7 @@ import java.util.Random;
 			}
 
 			void draw(Graphics g) {
-				object.draw(g);
+				bucket.draw(g);
 				for (int i = 0; i < raindrops.size(); i++) {
 					raindrops.get(i).draw(g);
 				}
@@ -70,14 +68,14 @@ import java.util.Random;
 				for (int i = 0; i < pebbles.size(); i++) {
 					if (pebbles.get(i).isAlive == false) {
 						pebbles.remove(i);
-						score++; 
+						
 					}
 				}
 
 				for (int i = 0; i < raindrops.size(); i++) {
 					if (raindrops.get(i).isAlive == false) {
 						raindrops.remove(i);
-
+						score++; 
 					}
 				}
 			
@@ -86,19 +84,16 @@ import java.util.Random;
 
 			void checkCollision() {
 
-				for (Bucket bucket) {
 					for (Rain r : raindrops) {
 						if (r.collisionBox.intersects(bucket.collisionBox)) {
 							r.isAlive = false;
-							
-						}
-
+		
 					}
 				}
 				for(Rocks p : pebbles) {
 						if(p.collisionBox.intersects(bucket.collisionBox)) {
 							p.isAlive=false;
-							object.isAlive=false;
+							bucket.isAlive=false;
 						}
 					}
 				}

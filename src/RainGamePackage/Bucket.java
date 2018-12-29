@@ -16,7 +16,7 @@ void update() {
 	
 }
 void draw(Graphics g) {
-	g.drawImage(RainGamePanel.woodenbucket, x, y, width, height, null);
+	g.drawImage(RainGamePanel.woodenbucket, x, y, 100, 110, null);
     
 }
 	

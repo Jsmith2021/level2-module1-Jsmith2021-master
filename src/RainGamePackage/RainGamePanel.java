@@ -64,8 +64,8 @@ RainGamePanel(){
          rain = ImageIO.read(this.getClass().getResourceAsStream("rainpic.jpg"));
          rainpics = ImageIO.read(this.getClass().getResourceAsStream("rain.jpg"));
          sunny = ImageIO.read(this.getClass().getResourceAsStream("sunnyday.jpg"));
-         raindrop = ImageIO.read(this.getClass().getResourceAsStream("raindroppic.png"));
-         woodenbucket = ImageIO.read(this.getClass().getResourceAsStream("bucket.png"));
+         //raindrop = ImageIO.read(this.getClass().getResourceAsStream("raindroppic.png"));
+         woodenbucket = ImageIO.read(this.getClass().getResourceAsStream("homedepotbucket.png"));
          rock = ImageIO.read(this.getClass().getResourceAsStream("rockpic.png")); 
 
  } catch (IOException e) {
@@ -85,6 +85,14 @@ void updateInstructionsState() {
 }
 void updateGameState() {	
 	bucket.update();
+	manager.update();
+	manager.manageEnemies();
+	manager.checkCollision();
+	manager.purgeObjects();
+	
+	if(bucket.isAlive==false) {
+		currentState=END_STATE;
+	}
 }
 			
 void updateEndState() {
@@ -93,7 +101,7 @@ void updateEndState() {
 
 void drawGameState(Graphics g) {
 	g.drawImage(rainpics, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
-		bucket.draw(g);
+		manager.draw(g);
 }
 
 void drawEndState(Graphics g) {
@@ -221,24 +229,12 @@ if(e.getKeyCode()==KeyEvent.VK_SHIFT) {
 	}
 	
 }
-if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-	bucket.y+=2;	
-	
-	
-}
-if(e.getKeyCode()==KeyEvent.VK_UP) {
-	bucket.y-=2;
-}
 if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
 bucket.x+=2;
 }
 if(e.getKeyCode()==KeyEvent.VK_LEFT) {
 bucket.x-=2;
 }
-//if(e.getKeyCode()==KeyEvent.VK_SPACE) {
-	//object.addProjectile(new Projectile(rocket.x+20, rocket.y, 10, 10));
-//	System.out.println("Projectile shot");
-//}
 }
 
         

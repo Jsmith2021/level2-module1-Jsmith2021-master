@@ -1,5 +1,6 @@
 package RainGamePackage;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import RainGamePackage.rainGameObject;
@@ -16,7 +17,10 @@ public class Rain extends rainGameObject{
 		super.update();
 	}
 	void draw(Graphics g) {
-		g.drawImage(RainGamePanel.raindrop, x, y, width, height, null);
+		//g.drawImage(RainGamePanel.raindrop, x, y, width, height, null);
+		g.setColor(Color.BLACK);
+		g.fillRect(10, 10, 50, 50);
+		System.out.println(x+""+y+""+width+""+height);
 	}
 	
 
