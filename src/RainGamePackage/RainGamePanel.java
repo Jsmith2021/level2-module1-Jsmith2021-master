@@ -25,7 +25,6 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 	final int INSTRUCTIONS_STATE = -1;
 	final int END_STATE = 2;
 	int currentState= MENU_STATE;
-	int score;
 	Font menuFont;
 	Font startFont;
 	Font instructionsFont;
@@ -36,6 +35,7 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 	Font instructions;
 	Font instructions1;
 	Font instructionsTitle;
+	Font scoreFont;
 	  public static BufferedImage rain;
 	  public static BufferedImage rainpics;
 	  public static BufferedImage sunny;
@@ -57,14 +57,15 @@ RainGamePanel(){
 	endFont2=new Font("Arial", Font.PLAIN, 24);
 	restart=new Font("Arial", Font.PLAIN, 24);
 	instructionsTitle=new Font("Arial", Font.BOLD, 36);
+	scoreFont=new Font("Arial", Font.BOLD, 36);
 	object=new rainGameObject(10, 10, 100, 100);
 	bucket=new Bucket(250, 700, 10, 10);
 	manager=new RainObjectManager(bucket);
 	 try {
-         rain = ImageIO.read(this.getClass().getResourceAsStream("rainpic.jpg"));
-         rainpics = ImageIO.read(this.getClass().getResourceAsStream("rain.jpg"));
+         rain = ImageIO.read(this.getClass().getResourceAsStream("rainclouds.png"));
+         rainpics = ImageIO.read(this.getClass().getResourceAsStream("Rain-Clouds.jpg"));
          sunny = ImageIO.read(this.getClass().getResourceAsStream("sunnyday.jpg"));
-         //raindrop = ImageIO.read(this.getClass().getResourceAsStream("raindroppic.png"));
+         raindrop = ImageIO.read(this.getClass().getResourceAsStream("raindropimage.png"));
          woodenbucket = ImageIO.read(this.getClass().getResourceAsStream("homedepotbucket.png"));
          rock = ImageIO.read(this.getClass().getResourceAsStream("rockpic.png")); 
 
@@ -89,6 +90,7 @@ void updateGameState() {
 	manager.manageEnemies();
 	manager.checkCollision();
 	manager.purgeObjects();
+	manager.getScore();
 	
 	if(bucket.isAlive==false) {
 		currentState=END_STATE;
@@ -96,11 +98,14 @@ void updateGameState() {
 }
 			
 void updateEndState() {
-	
+	manager.getScore();
 }
 
 void drawGameState(Graphics g) {
 	g.drawImage(rainpics, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
+	g.setFont(scoreFont);
+	g.setColor(Color.GRAY);
+	g.drawString("Score: "+manager.score, 325, 40);
 		manager.draw(g);
 }
 
@@ -111,23 +116,23 @@ void drawEndState(Graphics g) {
 	g.drawString("Game Over!", 120, 150);
 	g.setFont(endFont2);
 	g.setColor(Color.WHITE);
-	g.drawString("You only caught " +score+ " inches of water", 85, 300);
+	g.drawString("You only caught " +manager.score+ " inches of water", 85, 300);
 	g.setFont(restart);
 	g.setColor(Color.WHITE);
-	g.drawString("Press SHIFT to try again", 110, 500);
+	g.drawString("Press ENTER to try again", 110, 500);
 	
 }
 
 void drawMenuState(Graphics g) {
 g.drawImage(rain, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
 g.setFont(menuFont);
-g.setColor(Color.WHITE);
+g.setColor(Color.GRAY);
 g.drawString("Rain Catcher", 85, 150);
 g.setFont(startFont);
-g.setColor(Color.WHITE);
+g.setColor(Color.GRAY);
 g.drawString("Press ENTER to Begin", 110, 300);
 g.setFont(instructionsFont);
-g.setColor(Color.WHITE);
+g.setColor(Color.GRAY);
 g.drawString("Press SPACE for Instructions",83 ,450);
 }
 
@@ -203,14 +208,11 @@ public void keyPressed(KeyEvent e) {
 		currentState++;
 	}
 		
-		else if (currentState > END_STATE){
+		if (currentState > END_STATE){
+			bucket=new Bucket(250, 700, 50, 50) ;
+	    	manager= new RainObjectManager(bucket);
         currentState = MENU_STATE;
-		}
-	
-        else if(currentState==END_STATE) {
-        System.out.println("hey");
-        }
-		
+		}	
 
 if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 	
@@ -222,13 +224,7 @@ if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 	}
 }
 
-if(e.getKeyCode()==KeyEvent.VK_SHIFT) {
-	
-	if(currentState==END_STATE) {
-		currentState = MENU_STATE;
-	}
-	
-}
+
 if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
 bucket.x+=2;
 }

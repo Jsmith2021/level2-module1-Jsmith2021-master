@@ -87,6 +87,7 @@ import java.util.Random;
 					for (Rain r : raindrops) {
 						if (r.collisionBox.intersects(bucket.collisionBox)) {
 							r.isAlive = false;
+					
 		
 					}
 				}
