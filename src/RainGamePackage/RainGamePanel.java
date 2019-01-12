@@ -59,14 +59,14 @@ RainGamePanel(){
 	instructionsTitle=new Font("Arial", Font.BOLD, 36);
 	scoreFont=new Font("Arial", Font.BOLD, 36);
 	object=new rainGameObject(10, 10, 100, 100);
-	bucket=new Bucket(250, 700, 10, 10);
+	bucket=new Bucket(250, 675, 125, 125);
 	manager=new RainObjectManager(bucket);
 	 try {
          rain = ImageIO.read(this.getClass().getResourceAsStream("rainclouds.png"));
          rainpics = ImageIO.read(this.getClass().getResourceAsStream("Rain-Clouds.jpg"));
          sunny = ImageIO.read(this.getClass().getResourceAsStream("sunnyday.jpg"));
          raindrop = ImageIO.read(this.getClass().getResourceAsStream("raindropimage.png"));
-         woodenbucket = ImageIO.read(this.getClass().getResourceAsStream("homedepotbucket.png"));
+         woodenbucket = ImageIO.read(this.getClass().getResourceAsStream("woodenbucket.png"));
          rock = ImageIO.read(this.getClass().getResourceAsStream("rockpic.png")); 
 
  } catch (IOException e) {
@@ -104,7 +104,7 @@ void updateEndState() {
 void drawGameState(Graphics g) {
 	g.drawImage(rainpics, 0,0, RainCatcher.WIDTH, RainCatcher.HEIGHT, null);
 	g.setFont(scoreFont);
-	g.setColor(Color.GRAY);
+	g.setColor(Color.BLACK);
 	g.drawString("Score: "+manager.score, 325, 40);
 		manager.draw(g);
 }
@@ -142,8 +142,9 @@ g.setFont(instructionsTitle);
 g.setColor(Color.WHITE);
 g.drawString("Rain Catcher Instructions", 25, 150);
 g.setFont(instructions);
-g.drawString("Try to catch as much rain", 110, 275);
-g.drawString("as you can by moving the bucket", 80, 350);
+g.drawString("Try to catch as much rain", 110, 250);
+g.drawString("as you can by moving the bucket", 80, 325);
+g.drawString("without catching any rocks.", 100, 400);
 g.setFont(instructions1);
 g.drawString("Try to beat your previous score!", 90, 525);
 g.drawString("Good luck and have fun!", 130, 625);
@@ -209,7 +210,7 @@ public void keyPressed(KeyEvent e) {
 	}
 		
 		if (currentState > END_STATE){
-			bucket=new Bucket(250, 700, 50, 50) ;
+			bucket=new Bucket(250, 700, 100, 100);
 	    	manager= new RainObjectManager(bucket);
         currentState = MENU_STATE;
 		}	
@@ -226,10 +227,10 @@ if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 
 
 if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-bucket.x+=2;
+bucket.x+=8;
 }
 if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-bucket.x-=2;
+bucket.x-=8;
 }
 }
 
