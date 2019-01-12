@@ -36,6 +36,7 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 	Font instructions1;
 	Font instructionsTitle;
 	Font scoreFont;
+	Boolean moveRight=false;
 	  public static BufferedImage rain;
 	  public static BufferedImage rainpics;
 	  public static BufferedImage sunny;
@@ -191,6 +192,9 @@ public void actionPerformed(ActionEvent e) {
         updateEndState();
 
 }
+	if(moveRight) {
+		bucket.x++;
+	}
 	
 	
 	repaint();
@@ -227,7 +231,7 @@ if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 
 
 if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-bucket.x+=8;
+moveRight=true;
 }
 if(e.getKeyCode()==KeyEvent.VK_LEFT) {
 bucket.x-=8;
@@ -239,7 +243,7 @@ bucket.x-=8;
 @Override
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
-	
+	if()
 }
 
 
