@@ -7,7 +7,7 @@ public class Bucket extends rainGameObject {
 	
 	Bucket(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed=10;
+		speed=20;
 		// TODO Auto-generated constructor stub
 	}
 void update() {
