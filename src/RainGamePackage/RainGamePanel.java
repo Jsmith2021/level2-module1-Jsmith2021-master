@@ -181,7 +181,6 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(currentState);
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == INSTRUCTIONS_STATE) {
@@ -193,25 +192,21 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 
 		}
 		if (moveRight) {
-			if (bucket.x <RainCatcher.WIDTH-125-8) {
-				bucket.x +=8;
+			if (bucket.x +125 <RainCatcher.WIDTH) {
+				bucket.x+=8;
 			}
-			else {
-				bucket.x =RainCatcher.WIDTH-125-8;
-			}
-			
 		}
 
 		else if (moveLeft) {
-			if(bucket.x >8) {
+			if(bucket.x >=8) {
 				bucket.x -=8;
-			}
-			else {
-				bucket.x =0;
+				
 			}
 			
 		}
+		
 		repaint();
+		
 	
 	}
 
@@ -236,7 +231,7 @@ public class RainGamePanel extends JPanel implements ActionListener, KeyListener
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-System.out.println("space");
+
 			if (currentState == MENU_STATE) {
 				currentState = INSTRUCTIONS_STATE;
 			} else if (currentState == INSTRUCTIONS_STATE) {
@@ -248,7 +243,7 @@ System.out.println("space");
 			moveRight = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			moveLeft = true;
-			System.out.println("left key");
+			
 		}
 	}
 
@@ -256,9 +251,9 @@ System.out.println("space");
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			moveRight = true;
+			moveRight = false;
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			moveLeft = true;
+			moveLeft = false;
 
 		}
 	}

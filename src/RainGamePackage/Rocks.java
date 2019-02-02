@@ -13,7 +13,7 @@ public class Rocks extends rainGameObject{
 		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 		Random random=new Random();
-		speed2=random.nextInt(20)+1;
+		speed2=random.nextInt(13)+1;
 	}
 	void update() {
 		y+=speed2;
